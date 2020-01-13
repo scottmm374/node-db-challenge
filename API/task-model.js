@@ -15,14 +15,14 @@ function getTasks() {
     .join("projects as p", "t.project_id", "p.id");
 }
 
-async function addTask(tasksData) {
-  const [id] = await db("tasks").insert(tasksData);
+async function addTask(task) {
+  const [id] = await db("tasks").insert(task);
   return db("tasks")
     .where({ id })
     .first();
 }
-
 module.exports = {
   getTasks,
   addTask
+  // findId
 };

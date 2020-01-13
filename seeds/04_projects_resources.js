@@ -1,5 +1,5 @@
 exports.seed = async knex => {
-  await knex("resources").insert([
+  await knex("projects_resources").insert([
     {
       project_id: 1,
       resource_id: 1

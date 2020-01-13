@@ -13,9 +13,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  const newTask = req.body;
-  const { id } = req.params;
+router.post("/projects/:id", async (req, res) => {
+  const newTask = {
+    task_desc: req.body.task_desc,
+    notes: req.body.notes,
+    completed: req.body.completed || false,
+    project_id: req.params.id
+  };
   try {
     const data = await tasks.addTask(newTask);
     res.status(201).json(data);
