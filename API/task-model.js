@@ -12,9 +12,7 @@ function getTasks() {
       "t.completed"
     )
     .from("tasks as t")
-    .join("projects as p", "t.project_id", "p.id")
-    .where({ id })
-    .first();
+    .join("projects as p", "t.project_id", "p.id");
 }
 
 async function addTask(tasksData) {

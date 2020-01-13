@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/projects/:id/", async (req, res) => {
+router.post("/", async (req, res) => {
   const newTask = req.body;
   const { id } = req.params;
   try {
