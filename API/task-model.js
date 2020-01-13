@@ -1,7 +1,8 @@
 const db = require("../data/db-config");
 
-function getTasks() {
-  return db("tasks")
+async function getTasks() {
+  const data = await db("tasks as t")
+    .join("projects as p", "t.project_id", "p.id")
     .select(
       "t.id",
       "t.task_desc",
@@ -10,9 +11,14 @@ function getTasks() {
       "p.project_name",
       "p.project_desc",
       "t.completed"
-    )
-    .from("tasks as t")
-    .join("projects as p", "t.project_id", "p.id");
+    );
+
+  return data.map(task => {
+    return {
+      ...task,
+      completed: task.completed === 1 ? true : false
+    };
+  });
 }
 
 async function addTask(task) {
@@ -24,5 +30,4 @@ async function addTask(task) {
 module.exports = {
   getTasks,
   addTask
-  // findId
 };
