@@ -31,22 +31,22 @@ exports.up = async function(knex) {
       .onUpdate("CASCADE");
   });
 
-  await knex.schema.createTable("projects_resources", table => {
-    table
+  await knex.schema.createTable("projects_resources", tbl => {
+    tbl
       .integer("project_id")
       .notNullable()
       .references("id")
       .inTable("projects")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
-    table
+    tbl
       .integer("resource_id")
       .notNullable()
       .references("id")
-      .inTable("resource")
+      .inTable("resources")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
-    table.primary(["project_id", "resource_id"]);
+    tbl.primary(["project_id", "resource_id"]);
   });
 };
 
